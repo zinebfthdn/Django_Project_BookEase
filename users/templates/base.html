@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ReadEase{% endblock %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-white to-blue-100 min-h-screen">
+
+
+        {% include 'navbar.html' %}
+
+
+    <div class="container mx-auto py-8 px-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

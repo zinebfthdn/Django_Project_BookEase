@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Book</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p>Author: {{ book.author }}</p>
+    <p>Approved: {{ book.approved }}</p>
+    <a href="{% url 'admin_download_book' book.id %}">Download PDF</a>
+    <a href="{% url 'admin_index' %}">Back to Dashboard</a>
+</body>
+</html>

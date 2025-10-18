@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8 px-4">
+    <h1 class="text-3xl text-green-200 font-bold mb-4 text-center">
+        ReadEase
+    </h1>
+        <h2 class="text-2xl font-semibold mb-2">Books</h2>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 ">
+            {% for book in books %}
+                <li class="bg-white p-4 rounded-lg shadow-md flex items-center justify-between">
+                    <div class="ml-5">
+                    <strong class="block text-xl mb-2">{{ book.title }}</strong>
+                    <p class="text-gray-600 mb-2">by {{ book.author }}</p> </div>
+                    <div class="flex justify-center lg:gap-2">
+                        <a href="{{ book.pdf.url }}" class="bg-green-200 hover:bg-green-300 text-white py-2 px-4 rounded mr-2" download>Download</a>
+                        <a href="{{ book.pdf.url }}" class="bg-blue-200 hover:bg-blue-300 text-white py-2 px-4 rounded" target="_blank">View</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

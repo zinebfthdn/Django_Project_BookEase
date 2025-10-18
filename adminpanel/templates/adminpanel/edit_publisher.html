@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Publisher</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+<body class="bg-gradient-to-br from-indigo-50 via-white to-blue-100 flex items-center justify-center  min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center">Edit Publisher</h1>
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="w-full bg-green-300 text-white py-2 px-4 rounded hover:bg-green-400 transition">Save Changes</button>
+        </form>
+        <div class="text-center mt-4">
+            <a href="{% url 'admin_index' %}" class="inline-block bg-green-300 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Cancel</a>
+        </div>
+        
+    </div>
+</body>
+</html>
+

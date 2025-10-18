@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8 px-4">
+    <h1 class="text-3xl font-bold mb-6">All Books</h1>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for book in books %}
+            {% if book.approved %}
+        <li class="flex items-center justify-between bg-white p-4 rounded-lg shadow-md">
+            <div>
+                <h2 class="text-xl font-semibold">{{ book.title }}</h2>
+                <p class="text-gray-600">by {{ book.author }}</p>
+            </div>
+
+            <div class="space-x-2">
+                <a href="{% url 'admin_edit_book' book.id %}" class="bg-green-200 hover:bg-green-300 text-white py-2 px-3 rounded">Edit</a>
+                <a href="{% url 'delete_book' book.id %}" class="bg-green-200 hover:bg-green-300 text-white py-2 px-3 rounded">Delete</a>
+                <a href="{% url 'admin_download_book' book.id %}" class="bg-blue-200 hover:bg-blue-300 text-white py-2 px-4 rounded">Download</a>
+                <a href="{{ book.pdf.url }}" class="bg-blue-200 hover:bg-blue-300 text-white py-2 px-4 rounded"
+                target="_blank">View</a>
+            </div>
+        </li>
+                {% endif %}
+        {% empty %}
+        <li>No books available</li>
+        {% endfor %}
+    </ul>
+    <h1 class="text-3xl font-bold my-6">Books to be Approved</h1>
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {% for book in books %}
+        {% if not book.approved %}
+        <li class="flex items-center justify-between bg-white p-4 rounded-lg shadow-md">
+            <div>
+                <h2 class="text-xl font-semibold">{{ book.title }}</h2>
+                <p class="text-gray-600">by {{ book.author }}</p>
+            </div>
+            <div class="mt-1">
+                <a href="{% url 'approve_book' book.id %}"
+                   class="bg-green-200 text-white py-2 px-4 rounded hover:bg-green-300">Approve</a>
+                <a href="{% url 'delete_book' book.id %}" class="bg-green-200 text-white py-2 px-4 rounded hover:bg-green-300">Reject</a>
+            </div>
+        </li>
+        {% endif %}
+        {% empty %}
+        <li>No books to approve</li>
+        {% endfor %}
+    </ul>
+    <h1 class="text-3xl font-bold my-6">All Users</h1>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for user in Users %}
+        {% if not user.user_type == 'admin' %}
+        <li class="flex items-center justify-between bg-white p-4 rounded-lg shadow-md">
+            <div>
+            <div class="flex gap-1 items-center  text-xl ">
+                <p>{{ user.username }}</p>
+            </div>
+            <div  class="flex gap-1 items-center">
+                <p>{{ user.email }}</p>
+            </div>
+            </div>
+            <div class="flex gap-4">
+                <a class="text-green-600 hover:underline" href="{% url 'edit_publisher' user.id %}">Edit</a>
+                <a href="{% url 'delete_user' user.id %}" class="text-red-500 hover:underline">Delete</a>
+            </div>
+        </li>
+        {% endif %}
+        {% empty %}
+        <li>No users available</li>
+        {% endfor %}
+    </ul>
+    <div class="ml-2 mt-5">
+    <a href="{% url 'logout' %}" class=" bg-blue-200 hover:bg-blue-300 text-white py-2 px-4 rounded">Logout</a>
+</div>
+    </div>
+</body>
+</html>
+{% endblock %}
